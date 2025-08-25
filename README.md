@@ -70,13 +70,6 @@ docker run --rm -e POSTGRES_PASSWORD=pass -p 5432:5432 \
   ghcr.io/curiousdanil/postgres:17
 ```
 
-### Custom app DB (pg_cron still managed from postgres)
-
-```bash
-docker run --rm -e POSTGRES_PASSWORD=pass -e POSTGRES_DB=myappdb \
-  -p 5432:5432 ghcr.io/curiousdanil/postgres:17
-```
-
 ### docker-compose
 
 ```yaml
@@ -94,7 +87,7 @@ volumes:
   pgdata:
 ```
 
-### Sanity checks (optional)
+### Sanity checks
 
 ```bash
 # Show which libs are preloaded and which DB pg_cron is bound to
@@ -108,7 +101,7 @@ psql "postgres://postgres:pass@localhost:5432/postgres" -c "SHOW cron.database_n
 
 ### Cron DB binding
 
-This image fixes `cron.database_name = 'postgres'` (robust default).  
+This image fixes `cron.database_name = 'postgres'`.  
 Create cron jobs from the `postgres` DB:
 
 ```sql
@@ -169,7 +162,7 @@ SELECT pg_stat_statements_reset();
 ### Logging
 
 Audit entries and general Postgres logs go to container stdout/stderr.  
-Ensure your platform (Docker/Compose/Kubernetes) collects these logs.
+Ensure your platform collects these logs.
 
 ---
 
